@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center"> lista Empleados</h2>
+   <table class="table table-dark table-striped tavle-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Departamento</th>
+        <th>Sueldo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (employee of employeesList(); track $index) {
+        <tr>
+          <td>{{employee.idEmpleado}}</td>
+           <td>{{employee.nombre }}</td>
+          <td>{{employee.departamento }}</td>
+          <td>{{employee.sueldo | currency:'':'symbol':'1.2-2'}}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" [routerLink]="['/edit-employee',employee.idEmpleado]">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteEmployeeById(employee.idEmpleado)"
+            [disabled]="deleteById() === employee.idEmpleado">
+              {{ deleteById() === employee.idEmpleado ? 'Eliminando..':'Eliminar'}}</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+   </table>
+   <app-button [type]="'submit'" variant="secondary">Regresar</app-button>
+</div>

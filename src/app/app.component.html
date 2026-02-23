@@ -1,0 +1,39 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow navbar-purple mb-6">
+    <div class="container-fluid">
+
+      <!-- Logo / Marca -->
+      <a class="navbar-brand fw-bold" routerLink="/employees">
+        RH App
+      </a>
+
+      <!-- Botón responsive -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRH"
+        aria-controls="navbarRH" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Contenido -->
+      <div class="collapse navbar-collapse" id="navbarRH">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/employees" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              📋 Listado
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/employees-add" routerLinkActive="active">
+              ➕ Agregar
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>
