@@ -9,7 +9,7 @@ import { Empleado } from '../models/empleado';
 export class EmpleadoService {
 
   private http = inject(HttpClient);
-  private baseUrl = 'http://10.17.139.38:5000/api/empleados'
+  private baseUrl = 'https://back-end-python-rh.onrender.com/api/empleados'
 
   constructor() { }
 
