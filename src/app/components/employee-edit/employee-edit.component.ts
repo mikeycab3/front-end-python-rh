@@ -4,11 +4,12 @@ import { EmpleadoService } from '../../services/empleado.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {NgxSpinnerModule, NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-employee-edit',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, RouterLink, CommonModule,NgxSpinnerModule],
   templateUrl: './employee-edit.component.html',
   styleUrl: './employee-edit.component.css'
 })
@@ -17,6 +18,7 @@ export class EmployeeEditComponent {
   private employeeService = inject(EmpleadoService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  spinnerService = inject(NgxSpinnerService);
 
   employee!: Empleado;
 
@@ -49,10 +51,12 @@ export class EmployeeEditComponent {
   }
 
    loadEmployee(id:number){
+    this.spinnerService.show();
     this.employeeService.getEmployeeById(id).subscribe({
       next: (data) => {
         this.empleado = data;
         this.cargando = false;
+        this.spinnerService.hide();
       },
       error: err => {
       console.log('Error al cargar empleado', err);

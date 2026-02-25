@@ -2,3 +2,6 @@
 .navbar-purple{
   background:linear-gradient(90deg, #6f42c1,#8e44ad);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

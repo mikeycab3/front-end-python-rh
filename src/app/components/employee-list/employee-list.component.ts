@@ -1,14 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { Empleado } from '../../models/empleado';
 import { EmpleadoService } from '../../services/empleado.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from '../../desing-atomic/button/button.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, ButtonComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css'
 })
@@ -16,17 +16,20 @@ export class EmployeeListComponent {
 
   employeesList = signal<Empleado[]>([]);
   private employeeService = inject(EmpleadoService)
+  platformId = inject(PLATFORM_ID);
 
   //Para deshabilitar botones mientras se elimina
   deleteById = signal<number | null>(null);
 
-  ngOnInit(): void {
-    this.loadData();
+  ngOnInit(): void {if (isPlatformBrowser(this.platformId)) {
+        this.loadData();
+  }
+
 
   }
 
   loadData(){
-    this.employeeService.getEmployee().subscribe(data=>{ this.employeesList.set(data)})
+    this.employeeService.getEmployee().pipe(take(1)).subscribe(data=>{ this.employeesList.set(data)})
   }
 
   deleteEmployeeById(id:any){
